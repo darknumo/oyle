@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat</title>
+<style>
+    body {
+        margin: 0;
+        background: #ece5dd;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .phone {
+        width: 360px;
+        height: 640px;
+        background: #fff;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .header {
+        background: #075e54;
+        color: white;
+        padding: 15px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .chat {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        background: #e5ddd5;
+    }
+
+    .msg {
+        max-width: 75%;
+        padding: 10px 14px;
+        margin-bottom: 10px;
+        border-radius: 18px;
+        animation: fadeIn 0.4s ease forwards;
+        opacity: 0;
+        word-wrap: break-word;
+    }
+
+    .left {
+        background: #fff;
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+    }
+
+    .right {
+        background: #dcf8c6;
+        align-self: flex-end;
+        border-bottom-right-radius: 5px;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="phone">
+    <div class="header">💬 Chat</div>
+    <div class="chat" id="chat"></div>
+</div>
+
+<script>
+const messages = [
+    { side: "left", text: "Merhaba 👋" },
+    { side: "right", text: "Merhaba 😊" },
+    { side: "left", text: "Sana bir şey göstermek istiyorum..." },
+    { side: "right", text: "Ne?" },
+    { side: "left", text: "Bu siteyi senin için yaptım ❤️" },
+    { side: "right", text: "Cidden mi? 😍" },
+    { side: "left", text: "Evet. Videodakiyle birebir 😉" },
+    { side: "right", text: "Bayıldım 🥰" }
+];
+
+const chat = document.getElementById("chat");
+let index = 0;
+
+function addMessage() {
+    if (index >= messages.length) return;
+
+    const msg = document.createElement("div");
+    msg.className = "msg " + messages[index].side;
+    msg.innerText = messages[index].text;
+
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+
+    index++;
+    setTimeout(addMessage, 1200);
+}
+
+addMessage();
+</script>
+
+</body>
+</html>
